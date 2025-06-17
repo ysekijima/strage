@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Slick + Bootstrap4.5 Modal ボタン・ドット配置</title>
+
+  <!-- Bootstrap 4.5 CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Slick CSS -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+
+<style>
+  .slide-item {
+    text-align: center;
+    padding: 20px;
+  }
+  .slide-item img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    margin: 0 auto;
+  }
+  .slide-item p {
+    margin-top: 10px;
+    font-size: 16px;
+  }
+  .slide-item a {
+    color: #007BFF;
+    text-decoration: none;
+  }
+  .custom-dots {
+    margin-top: 10px;
+    text-align: center;
+  }
+  .custom-dots ul {
+    display: inline-flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .custom-dots li {
+    margin: 0 6px;
+  }
+  .custom-dots li button {
+    border: none;
+    background: transparent;
+    padding: 0;
+    font-size: 0;
+  }
+  .custom-dots li button:before {
+    content: '●';
+    font-size: 14px;
+    color: #ddd;
+    opacity: 1;
+  }
+  .custom-dots li.slick-active button:before {
+    color: #999;
+  }
+</style>
+
+</head>
+<body>
+
+<!-- モーダルを開くボタン -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sliderModal">
+  スライダーを開く
+</button>
+
+<!-- モーダル本体 -->
+<div class="modal fade" id="sliderModal" tabindex="-1" role="dialog" aria-labelledby="sliderModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="sliderModalLabel">GIF スライダー</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="slider">
+          <div class="slide-item">
+            <img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="GIF1">
+            <p><a href="https://example.com/1" target="_blank">リンク付きテキスト①</a></p>
+          </div>
+          <div class="slide-item">
+            <img src="https://media.giphy.com/media/l3q2K5jinAlChoCLS/giphy.gif" alt="GIF2">
+            <p><a href="https://example.com/2" target="_blank">リンク付きテキスト②</a></p>
+          </div>
+          <div class="slide-item">
+            <img src="https://media.giphy.com/media/26BRQTezZrKak4BeE/giphy.gif" alt="GIF3">
+            <p><a href="https://example.com/3" target="_blank">リンク付きテキスト③</a></p>
+          </div>
+          <div class="slide-item">
+            <img src="https://media.giphy.com/media/l0ExncehJzexFpRHq/giphy.gif" alt="GIF4">
+            <p><a href="https://example.com/4" target="_blank">リンク付きテキスト④</a></p>
+          </div>
+          <div class="slide-item">
+            <img src="https://media.giphy.com/media/xT9IgIc0lryrxvqVGM/giphy.gif" alt="GIF5">
+            <p><a href="https://example.com/5" target="_blank">リンク付きテキスト⑤</a></p>
+          </div>
+          <div class="slide-item">
+            <img src="https://media.giphy.com/media/3o6ZtaO9BZHcOjmErm/giphy.gif" alt="GIF6">
+            <p><a href="https://example.com/6" target="_blank">リンク付きテキスト⑥</a></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer flex-column">
+        <div class="mb-2">
+          <button type="button" class="btn btn-secondary" id="prevBtn">戻る</button>
+          <button type="button" class="btn btn-primary" id="nextBtn">次へ</button>
+        </div>
+        <div class="custom-dots"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Bootstrap 4.5 JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+<!-- Slick JS -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+<script>
+  $('#sliderModal').on('shown.bs.modal', function () {
+    if (!$('.slider').hasClass('slick-initialized')) {
+      $('.slider').slick({
+        dots: true,
+        infinite: true,
+        speed: 100,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+        appendDots: $('.custom-dots'), // ドットの表示先を指定
+        fade: true,             // ← この行を追加
+        cssEase: 'linear',      // ← スムーズに切り替え
+      });
+    }
+  });
+
+  $('#sliderModal').on('hidden.bs.modal', function () {
+    if ($('.slider').hasClass('slick-initialized')) {
+      $('.slider').slick('unslick');
+    }
+  });
+
+  $('#prevBtn').click(function () {
+    $('.slider').slick('slickPrev');
+  });
+
+  $('#nextBtn').click(function () {
+    $('.slider').slick('slickNext');
+  });
+</script>
+
+</body>
+</html>
