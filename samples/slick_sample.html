@@ -2,10 +2,15 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>Slick.js GIFスライダー＋アニメ枠</title>
+  <title>Slick Modal Sample</title>
+  <!-- Bootstrap 4.5 CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <!-- Slick CSS -->
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css">
   <style>
+    .slider {
+      margin: 20px auto;
+    }
     .slide-item {
       text-align: center;
       padding: 20px;
@@ -24,38 +29,33 @@
       color: #007BFF;
       text-decoration: none;
     }
+    .custom-dots {
+      text-align: center;
+      margin-top: 10px;
+    }
+    .custom-dots button {
+      border: none;
+      background: #ddd;
+      border-radius: 50%;
+      width: 12px;
+      height: 12px;
+      margin: 0 5px;
+      padding: 0;
+    }
+    .custom-dots .slick-active button {
+      background: #999;
+    }
     .border-box {
-      border: 2px solid red;
+      border: 3px solid red;
       padding: 10px;
-      width: 200px;
-      margin: 20px auto 0;
+      margin-top: 20px;
       opacity: 0;
-      transform: translateY(-50px);
+      transform: translateY(-30px);
       transition: all 0.5s ease;
     }
     .border-box.active {
       opacity: 1;
       transform: translateY(0);
-    }
-    .custom-dots {
-      text-align: center;
-      margin-top: 10px;
-    }
-    .custom-dots li {
-      display: inline-block;
-      margin: 0 5px;
-    }
-    .custom-dots button {
-      border: none;
-      background: #ddd;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      padding: 0;
-      cursor: pointer;
-    }
-    .custom-dots .slick-active button {
-      background: #999;
     }
   </style>
 </head>
@@ -94,22 +94,22 @@
             <p><a href="#">リンク付きテキスト⑥</a></p>
           </div>
         </div>
+        <div class="custom-dots"></div>
       </div>
-      <div class="modal-footer flex-column">
-        <div>
-          <button type="button" class="btn btn-secondary mr-2 prev-btn">戻る</button>
-          <button type="button" class="btn btn-primary next-btn">次へ</button>
-        </div>
-        <ul class="custom-dots"></ul>
+      <div class="modal-footer d-flex justify-content-between">
+        <button type="button" class="btn btn-secondary prev-btn">戻る</button>
+        <button type="button" class="btn btn-primary next-btn">次へ</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- jQuery, Bootstrap, Slick -->
+<!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<!-- Bootstrap 4.5 JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+<!-- Slick JS -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
 <script>
 $(document).ready(function(){
@@ -128,7 +128,6 @@ $(document).ready(function(){
     arrows: false
   });
 
-  // ボタン操作
   $('.prev-btn').click(function(){
     $slider.slick('slickPrev');
   });
@@ -136,7 +135,6 @@ $(document).ready(function(){
     $slider.slick('slickNext');
   });
 
-  // 枠アニメーション制御
   $slider.on('afterChange', function(event, slick, currentSlide){
     $('.border-box').removeClass('active');
     if (currentSlide === 1 || currentSlide === 2) {
@@ -144,7 +142,11 @@ $(document).ready(function(){
     }
   });
 
-  // モーダルを開くボタン（任意）
+  $('#slickModal').on('shown.bs.modal', function () {
+    $slider.slick('setPosition');
+  });
+
+  // 起動ボタンも作っておく
   $('<button class="btn btn-primary m-3">スライダーを開く</button>').appendTo('body').click(function(){
     $('#slickModal').modal('show');
   });
