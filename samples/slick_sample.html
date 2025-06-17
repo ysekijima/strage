@@ -29,9 +29,16 @@
       color: #007BFF;
       text-decoration: none;
     }
-    .custom-dots {
-      text-align: center;
-      margin-top: 10px;
+
+    .custom-dots ul {
+      display: flex !important;
+      justify-content: center;
+      padding-left: 0;
+      margin: 0;
+      list-style: none;
+    }
+    .custom-dots ul li {
+      margin: 0 5px;
     }
     .custom-dots button {
       border: none;
@@ -39,12 +46,14 @@
       border-radius: 50%;
       width: 12px;
       height: 12px;
-      margin: 0 5px;
       padding: 0;
+      cursor: pointer;
     }
     .custom-dots .slick-active button {
       background: #999;
     }
+
+
     .border-box {
       border: 3px solid red;
       padding: 10px;
@@ -57,6 +66,26 @@
       opacity: 1;
       transform: translateY(0);
     }
+
+    .absolute-box {
+      position: absolute;
+      top: 100px;
+      left: 50%;
+      transform: translate(-50%, -30px);
+      border: 3px solid red;
+      padding: 10px;
+      opacity: 0;
+      transition: all 0.5s ease;
+      background: rgba(255, 255, 255, 0.7);
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .absolute-box.active {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
   </style>
 </head>
 <body>
@@ -79,7 +108,7 @@
           <div class="slide-item">
             <img src="https://media.giphy.com/media/26BRQTezZrKak4BeE/giphy.gif" alt="GIF3">
             <p><a href="#">リンク付きテキスト③</a></p>
-            <div class="border-box">3枚目の赤枠</div>
+            <div class="border-box absolute-box">3枚目の赤枠</div>
           </div>
           <div class="slide-item">
             <img src="https://media.giphy.com/media/l0ExncehJzexFpRHq/giphy.gif" alt="GIF4">
@@ -135,12 +164,18 @@ $(document).ready(function(){
     $slider.slick('slickNext');
   });
 
+  // $slider.on('afterChange', function(event, slick, currentSlide){
+  //   $('.border-box').removeClass('active');
+  //   if (currentSlide === 1 || currentSlide === 2) {
+  //     $('.slider .slick-slide[data-slick-index="' + currentSlide + '"] .border-box').addClass('active');
+  //   }
+  // });
+
   $slider.on('afterChange', function(event, slick, currentSlide){
     $('.border-box').removeClass('active');
-    if (currentSlide === 1 || currentSlide === 2) {
-      $('.slider .slick-slide[data-slick-index="' + currentSlide + '"] .border-box').addClass('active');
-    }
+    $('.slick-current .border-box').addClass('active');
   });
+
 
   $('#slickModal').on('shown.bs.modal', function () {
     $slider.slick('setPosition');
