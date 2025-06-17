@@ -2,160 +2,153 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>Slick + Bootstrap4.5 Modal ボタン・ドット配置</title>
-
-  <!-- Bootstrap 4.5 CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <!-- Slick CSS -->
+  <title>Slick.js GIFスライダー＋アニメ枠</title>
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-
-<style>
-  .slide-item {
-    text-align: center;
-    padding: 20px;
-  }
-  .slide-item img {
-    width: 100%;
-    max-width: 300px;
-    height: auto;
-    margin: 0 auto;
-  }
-  .slide-item p {
-    margin-top: 10px;
-    font-size: 16px;
-  }
-  .slide-item a {
-    color: #007BFF;
-    text-decoration: none;
-  }
-  .custom-dots {
-    margin-top: 10px;
-    text-align: center;
-  }
-  .custom-dots ul {
-    display: inline-flex;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .custom-dots li {
-    margin: 0 6px;
-  }
-  .custom-dots li button {
-    border: none;
-    background: transparent;
-    padding: 0;
-    font-size: 0;
-  }
-  .custom-dots li button:before {
-    content: '●';
-    font-size: 14px;
-    color: #ddd;
-    opacity: 1;
-  }
-  .custom-dots li.slick-active button:before {
-    color: #999;
-  }
-</style>
-
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css">
+  <style>
+    .slide-item {
+      text-align: center;
+      padding: 20px;
+    }
+    .slide-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      margin: 0 auto;
+    }
+    .slide-item p {
+      margin-top: 10px;
+      font-size: 16px;
+    }
+    .slide-item a {
+      color: #007BFF;
+      text-decoration: none;
+    }
+    .border-box {
+      border: 2px solid red;
+      padding: 10px;
+      width: 200px;
+      margin: 20px auto 0;
+      opacity: 0;
+      transform: translateY(-50px);
+      transition: all 0.5s ease;
+    }
+    .border-box.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .custom-dots {
+      text-align: center;
+      margin-top: 10px;
+    }
+    .custom-dots li {
+      display: inline-block;
+      margin: 0 5px;
+    }
+    .custom-dots button {
+      border: none;
+      background: #ddd;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      padding: 0;
+      cursor: pointer;
+    }
+    .custom-dots .slick-active button {
+      background: #999;
+    }
+  </style>
 </head>
 <body>
 
-<!-- モーダルを開くボタン -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sliderModal">
-  スライダーを開く
-</button>
-
-<!-- モーダル本体 -->
-<div class="modal fade" id="sliderModal" tabindex="-1" role="dialog" aria-labelledby="sliderModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
+<!-- モーダル -->
+<div class="modal fade" id="slickModal" tabindex="-1" role="dialog" aria-labelledby="slickModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-
-      <div class="modal-header">
-        <h5 class="modal-title" id="sliderModalLabel">GIF スライダー</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
       <div class="modal-body">
         <div class="slider">
           <div class="slide-item">
             <img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="GIF1">
-            <p><a href="https://example.com/1" target="_blank">リンク付きテキスト①</a></p>
+            <p><a href="#">リンク付きテキスト①</a></p>
           </div>
           <div class="slide-item">
             <img src="https://media.giphy.com/media/l3q2K5jinAlChoCLS/giphy.gif" alt="GIF2">
-            <p><a href="https://example.com/2" target="_blank">リンク付きテキスト②</a></p>
+            <p><a href="#">リンク付きテキスト②</a></p>
+            <div class="border-box">2枚目の赤枠</div>
           </div>
           <div class="slide-item">
             <img src="https://media.giphy.com/media/26BRQTezZrKak4BeE/giphy.gif" alt="GIF3">
-            <p><a href="https://example.com/3" target="_blank">リンク付きテキスト③</a></p>
+            <p><a href="#">リンク付きテキスト③</a></p>
+            <div class="border-box">3枚目の赤枠</div>
           </div>
           <div class="slide-item">
             <img src="https://media.giphy.com/media/l0ExncehJzexFpRHq/giphy.gif" alt="GIF4">
-            <p><a href="https://example.com/4" target="_blank">リンク付きテキスト④</a></p>
+            <p><a href="#">リンク付きテキスト④</a></p>
           </div>
           <div class="slide-item">
             <img src="https://media.giphy.com/media/xT9IgIc0lryrxvqVGM/giphy.gif" alt="GIF5">
-            <p><a href="https://example.com/5" target="_blank">リンク付きテキスト⑤</a></p>
+            <p><a href="#">リンク付きテキスト⑤</a></p>
           </div>
           <div class="slide-item">
             <img src="https://media.giphy.com/media/3o6ZtaO9BZHcOjmErm/giphy.gif" alt="GIF6">
-            <p><a href="https://example.com/6" target="_blank">リンク付きテキスト⑥</a></p>
+            <p><a href="#">リンク付きテキスト⑥</a></p>
           </div>
         </div>
       </div>
-
       <div class="modal-footer flex-column">
-        <div class="mb-2">
-          <button type="button" class="btn btn-secondary" id="prevBtn">戻る</button>
-          <button type="button" class="btn btn-primary" id="nextBtn">次へ</button>
+        <div>
+          <button type="button" class="btn btn-secondary mr-2 prev-btn">戻る</button>
+          <button type="button" class="btn btn-primary next-btn">次へ</button>
         </div>
-        <div class="custom-dots"></div>
+        <ul class="custom-dots"></ul>
       </div>
-
     </div>
   </div>
 </div>
 
-<!-- jQuery -->
+<!-- jQuery, Bootstrap, Slick -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- Bootstrap 4.5 JS -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-<!-- Slick JS -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
 <script>
-  $('#sliderModal').on('shown.bs.modal', function () {
-    if (!$('.slider').hasClass('slick-initialized')) {
-      $('.slider').slick({
-        dots: true,
-        infinite: true,
-        speed: 100,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: false,
-        appendDots: $('.custom-dots'), // ドットの表示先を指定
-        fade: true,             // ← この行を追加
-        cssEase: 'linear',      // ← スムーズに切り替え
-      });
+$(document).ready(function(){
+  var $slider = $('.slider');
+
+  $slider.slick({
+    dots: true,
+    appendDots: $('.custom-dots'),
+    customPaging: function(slider, i) {
+      return '<button type="button"></button>';
+    },
+    infinite: true,
+    speed: 400,
+    fade: true,
+    cssEase: 'linear',
+    arrows: false
+  });
+
+  // ボタン操作
+  $('.prev-btn').click(function(){
+    $slider.slick('slickPrev');
+  });
+  $('.next-btn').click(function(){
+    $slider.slick('slickNext');
+  });
+
+  // 枠アニメーション制御
+  $slider.on('afterChange', function(event, slick, currentSlide){
+    $('.border-box').removeClass('active');
+    if (currentSlide === 1 || currentSlide === 2) {
+      $('.slider .slick-slide[data-slick-index="' + currentSlide + '"] .border-box').addClass('active');
     }
   });
 
-  $('#sliderModal').on('hidden.bs.modal', function () {
-    if ($('.slider').hasClass('slick-initialized')) {
-      $('.slider').slick('unslick');
-    }
+  // モーダルを開くボタン（任意）
+  $('<button class="btn btn-primary m-3">スライダーを開く</button>').appendTo('body').click(function(){
+    $('#slickModal').modal('show');
   });
-
-  $('#prevBtn').click(function () {
-    $('.slider').slick('slickPrev');
-  });
-
-  $('#nextBtn').click(function () {
-    $('.slider').slick('slickNext');
-  });
+});
 </script>
 
 </body>
