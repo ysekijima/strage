@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Slick Modal Sample</title>
+  <!-- Bootstrap 4.5 CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <!-- Slick CSS -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  <style>
+    .slider {
+      margin: 20px auto;
+    }
+    .slide-item {
+      text-align: center;
+      padding: 20px;
+    }
+    /* .slide-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      margin: 0 auto;
+    } */
+    .slide-item p {
+      margin-top: 10px;
+      font-size: 16px;
+    }
+    .slide-item a {
+      color: #007BFF;
+      text-decoration: none;
+    }
+
+    .custom-dots ul {
+      display: flex !important;
+      justify-content: center;
+      padding-left: 0;
+      margin: 0;
+      list-style: none;
+    }
+    .custom-dots ul li {
+      margin: 0 5px;
+    }
+    .custom-dots button {
+      border: none;
+      background: #ddd;
+      border-radius: 50%;
+      width: 12px;
+      height: 12px;
+      padding: 0;
+      cursor: pointer;
+    }
+    .custom-dots .slick-active button {
+      background: #999;
+    }
+
+
+    .border-box {
+      border: 3px solid red;
+      padding: 10px;
+      margin-top: 20px;
+      opacity: 0;
+      transform: translateY(-30px);
+      transition: all 0.5s ease;
+    }
+    .border-box.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .absolute-box {
+      position: absolute;
+      top: 100px;
+      left: 50%;
+      transform: translate(-50%, -30px);
+      border: 3px solid red;
+      padding: 10px;
+      opacity: 0;
+      transition: all 0.5s ease;
+      background: rgba(255, 255, 255, 0.7);
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .absolute-box.active {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    .image {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+    }
+
+    .image1 {
+      object-position: 0px 0px;
+    }
+
+    .image2 {
+      object-position: 0px -50px;
+    }
+
+    .image3 {
+      object-position: 0px -100px;
+    }
+
+    .image4 {
+      object-position: 0px -150px;
+    }
+
+    .image5 {
+      object-position: 0px -200px;
+    }
+
+    .image6 {
+      object-position: 0px -250px;
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- モーダル -->
+<div class="modal fade" id="slickModal" tabindex="-1" role="dialog" aria-labelledby="slickModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="slider">
+          <div class="slide-item">
+            <img src="https://ysekijima.github.io/storage/samples/samplepage.png" alt="GIF1" class="image image1">
+            <p><a href="#">リンク付きテキスト①</a></p>
+          </div>
+          <div class="slide-item">
+            <img src="https://ysekijima.github.io/storage/samples/samplepage.png" alt="GIF2" class="image image2">
+            <p><a href="#">リンク付きテキスト②</a></p>
+            <div class="border-box">2枚目の赤枠</div>
+          </div>
+          <div class="slide-item">
+            <img src="https://ysekijima.github.io/storage/samples/samplepage.png" alt="GIF3" class="image image3">
+            <p><a href="#">リンク付きテキスト③</a></p>
+            <div class="border-box absolute-box">3枚目の赤枠</div>
+          </div>
+          <div class="slide-item">
+            <img src="https://ysekijima.github.io/storage/samples/samplepage.png" alt="GIF4" class="image image4">
+            <p><a href="#">リンク付きテキスト④</a></p>
+          </div>
+          <div class="slide-item">
+            <img src="https://ysekijima.github.io/storage/samples/samplepage.png" alt="GIF5" class="image image5">
+            <p><a href="#">リンク付きテキスト⑤</a></p>
+          </div>
+          <div class="slide-item">
+            <img src="https://ysekijima.github.io/storage/samples/samplepage.png" alt="GIF6" class="image image6">
+            <p><a href="#">リンク付きテキスト⑥</a></p>
+          </div>
+        </div>
+        <div class="custom-dots"></div>
+      </div>
+      <div class="modal-footer d-flex justify-content-between">
+        <button type="button" class="btn btn-secondary prev-btn">戻る</button>
+        <button type="button" class="btn btn-primary next-btn">次へ</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Bootstrap 4.5 JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+<!-- Slick JS -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+<script>
+$(document).ready(function(){
+  var $slider = $('.slider');
+
+  $slider.slick({
+    dots: true,
+    appendDots: $('.custom-dots'),
+    customPaging: function(slider, i) {
+      return '<button type="button"></button>';
+    },
+    infinite: true,
+    speed: 400,
+    fade: true,
+    cssEase: 'linear',
+    arrows: false
+  });
+
+  $('.prev-btn').click(function(){
+    $slider.slick('slickPrev');
+  });
+  $('.next-btn').click(function(){
+    $slider.slick('slickNext');
+  });
+
+  // $slider.on('afterChange', function(event, slick, currentSlide){
+  //   $('.border-box').removeClass('active');
+  //   if (currentSlide === 1 || currentSlide === 2) {
+  //     $('.slider .slick-slide[data-slick-index="' + currentSlide + '"] .border-box').addClass('active');
+  //   }
+  // });
+
+  $slider.on('afterChange', function(event, slick, currentSlide){
+    $('.border-box').removeClass('active');
+    $('.slick-current .border-box').addClass('active');
+  });
+
+
+  $('#slickModal').on('shown.bs.modal', function () {
+    $slider.slick('setPosition');
+  });
+
+  // 起動ボタンも作っておく
+  $('<button class="btn btn-primary m-3">スライダーを開く</button>').appendTo('body').click(function(){
+    $('#slickModal').modal('show');
+  });
+});
+</script>
+
+</body>
+</html>
